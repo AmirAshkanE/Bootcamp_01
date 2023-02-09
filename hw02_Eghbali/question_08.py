@@ -1,8 +1,8 @@
 n = int(input())
-sum=0
+s=0
 i=0
 while i<n:
     number_input = int(input())
-    sum+=number_input
+    s+=number_input
     i+=1
-print(sum)
+print(s)
