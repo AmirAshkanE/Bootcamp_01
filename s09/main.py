@@ -52,6 +52,7 @@
 class Card:
     
     _hokm = 0
+    _active_suit = 0
     _suits2num = {"♥":0,"♦":1,"♣":2,"♠":3}
     _num2suits = {0:"♥",1:"♦",2:"♣",3:"♠"}
     def __init__(self,number,suit):
@@ -62,12 +63,41 @@ class Card:
     @classmethod
     def number_to_suit(cls,number):
         return cls._num2suits[number]
-    @classmethod(f)
+    
+    @classmethod
     def suit_to_number(cls,suit):
         return cls._suits2num[suit]
+   
+    @classmethod
+    def set_hokm(cls,hokm):                     # setter def
+        if 0 <= hokm < 4:
+            cls._hokm = hokm
+        else:
+            raise Exception("Hokm must be between 0 and 3")
+    
+    @classmethod
+    def set_active_suit(cls,suit):                     # setter def
+        if 0 <= suit < 4:
+            cls._active_suit = suit
+        else:
+            raise Exception("Suit must be between 0 and 3")
         
     def __gt__(self,other):
-        pass
-    
+        if self.suit == Card._hokm and other.suit != Card._hokm:
+            return True
+        elif self.suit == Card._hokm and other.suit == Card._hokm:
+            return True if self.number > other.number else False
+            # return self.number > other.number
+        elif self.suit != Card._hokm and other.suit == Card._hokm:
+            return False
+        elif self.suit != Card._hokm and other.suit != Card._hokm:
+            if self.suit == Card._active_suit and other.suit !=Card._active_suit:
+                return True
+            elif self.suit == Card._active_suit and other.suit ==Card._active_suit:
+                return self.number > other.number
+            elif self.suit != Card._active_suit and other.suit ==Card._active_suit:
+                return False
+            elif self.suit != Card._active_suit and other.suit !=Card._active_suit:
+                return self.suit > other.suit
     def __lt__(self,other):
         pass
