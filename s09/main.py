@@ -101,3 +101,49 @@ class Card:
                 return self.suit > other.suit
     def __lt__(self,other):
         pass
+    
+    
+# Inheritance
+
+class Father:
+    def __init__(self,name):
+        self.name = name
+        self.gender = "Male"
+    
+    
+    def say_hello(self):
+        print(f"hello i'm {self.name} and i'm father")
+
+class Mother:
+    def __init__(self,name):
+        self.name = name
+        self.gender = "Female"
+
+    def say_hello(self):
+        print(f"hello i'm {self.name} and i'm mother")
+    
+class Student(Father,Mother):
+    def __init__(self,n,id):
+        self.studen_id = id
+        # super(Father,self).__init__(n)     python 2 way of calling a parent
+        # super() refers to the parent class
+        # everything in parent's init function is inhereted
+        Mother.__init__(self,n)
+    
+    def say_hello(self):
+        print(f"hello i'm {self.name} and i'm a {'boy' if self.gender=='male' else 'girl' }")
+    
+    
+    
+p1 = Father("mohammad")
+p2 = Mother("mahdieh")
+s = Student("ali", 123)
+
+# print(p1.__dict__)
+# print(p2.__dict__)
+# print(s.__dict__)
+# print(Student.__mro__)              # multiple resolution order method, the order of parents which the class inherits from
+
+s.say_hello()
+p1.say_hello()
+p2.say_hello()
